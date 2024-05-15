@@ -21,7 +21,6 @@ password TEXT
 CREATE TABLE tasks (
 id SERIAL PRIMARY KEY,
 category_id INTEGER,
-user_id INTEGER,
 title TEXT,
 closing_date DATE,
 progress INTEGER,

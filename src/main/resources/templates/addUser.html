@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<htmel xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>新規ユーザー登録</h1>
+	<th:block th:if="${nullNameMessage}"><font color="red">[[${nullNameMessage}]]</font><br></th:block>
+	<th:block th:if="${nullEmailMessage}"><font color="red">[[${nullEmailMessage}]]</font><br></th:block>
+	<th:block th:if="${nullPassMessage}"><font color="red">[[${nullPassMessage}]]</font><br></th:block>
+	<th:block th:if="${passError}"><font color="red">[[${passError}]]</font><br></th:block>
+	<form action="/todo/userAdd" method="post">
+		<table>
+			<tr>
+				名前　　　　　　　　：<input type="text" name="name">
+			</tr><br>
+			<tr>
+				メールアドレス　　　：<input type="text" name="email">
+			</tr><br>
+			<tr>
+				パスワード　　　　　：<input type="text" name="pass">
+			</tr><br>
+			<tr>
+				パスワード（確認用）：<input type="text" name="passCheck">
+			</tr>
+		</table>
+		<p>以上の内容で登録する場合は下のボタンを押してください</p>
+		<button>新規登録</button>
+	</form>
+</body>
+</html>

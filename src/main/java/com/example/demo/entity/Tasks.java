@@ -18,17 +18,17 @@ public class Tasks {
 	private Integer id;
 	
 	@Column(name = "category_id")
-	private String categoryId;
+	private Integer categoryId;
 	
-	@Column(name = "user_id")
-	private String userId;
+	/*@Column(name = "user_id")
+	private Integer userId;*/
 	
 	private String title;
 	
 	@Column(name = "closing_date")
 	private Date closingDate;
 	
-	private String progress;
+	private Integer progress;
 	
 	private String memo;
 	
@@ -37,10 +37,19 @@ public class Tasks {
 		
 	}
 	
-	public Tasks(String categoryId, String userId, String title,
-			Date closingDate, String progress, String memo) {
+	public Tasks(Integer categoryId, String title,
+			Date closingDate, Integer progress, String memo) {
 		this.categoryId = categoryId;
-		this.userId = userId;
+		this.title = title;
+		this.closingDate = closingDate;
+		this.progress = progress;
+		this.memo = memo;
+	}
+	
+	public Tasks(Integer id, Integer categoryId, String title,
+			Date closingDate, Integer progress, String memo) {
+		this.id = id;
+		this.categoryId = categoryId;
 		this.title = title;
 		this.closingDate = closingDate;
 		this.progress = progress;
@@ -51,21 +60,21 @@ public class Tasks {
 		return id;
 	}
 
-	public String getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	public String getUserId() {
+	/*public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
-	}
+	}*/
 
 	public String getTitle() {
 		return title;
@@ -83,11 +92,11 @@ public class Tasks {
 		this.closingDate = closingDate;
 	}
 
-	public String getProgress() {
+	public Integer getProgress() {
 		return progress;
 	}
 
-	public void setProgress(String progress) {
+	public void setProgress(Integer progress) {
 		this.progress = progress;
 	}
 

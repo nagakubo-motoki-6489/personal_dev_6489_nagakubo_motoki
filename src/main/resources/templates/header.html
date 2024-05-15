@@ -5,6 +5,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>ToDoリスト</h1>
+	<header>	
+	<h1 class="logo">ToDoリスト</h1>
+	<div  class="account">
+		<th:block th:if="${@account.name}"><span style="color: deepskyblue;" th:text="${@account.name} + 'でログイン中'"></span></th:block>
+		<a href="/login">ログアウト</a>
+	</div>
+	</header>
 </body>
 </html>
