@@ -9,56 +9,62 @@
 
 	<body>
 		<header th:replace="header"></header>
-		<h3 align="center"><a href="/todo/add">新規タスク作成</a></h3>
-		<a href="/todo">すべてのタスクを表示</a><br>
-		<検索>
-			<th:block th:each="categories:${categories}">
-				優先度：
-				<a th:href="@{/todo/sort(category=${categories.priority})}">
-					<th:block th:text="${categories.priority}"></th:block>
-				</a>
-			</th:block>
-			<table class="box2">
-				<tr>
-					<th>NO</th>
-					<th>ToDo</th>
-					<th>優先度</th>
-					<th>期限</th>
-					<th>進捗状況</th>
-					<th>完了</th>
-					<th>変更</th>
-					<th>削除</th>
-				</tr>
-				<tr th:each="taskList:${tasks}">
-					<td th:text="${taskList.id}"></td> <!--タスクNO-->
-					<td th:text="${taskList.title}"></td> <!--件名-->
-					<!--↓優先度-->
-					<td th:if="${taskList.categoryId == 1}" th:text="高"></td>
-					<td th:if="${taskList.categoryId == 2}" th:text="中"></td>
-					<td th:if="${taskList.categoryId == 3}" th:text="低"></td>
-					<td th:text="${taskList.closingDate}"></td><!--期限-->
-					<!--↓進捗状況-->
-					<td th:if="${taskList.categoryId == 1}" th:text="未着手"></td>
-					<td th:if="${taskList.categoryId == 2}" th:text="進行中"></td>
-					<td th:if="${taskList.categoryId == 3}" th:text="完了"></td>
-					<td><!--完了ボタン-->
-						<form th:action="@{/todo/{taskId}/complete(taskId=${taskList.id})}" method="post">
-							<button>完了</button>
-						</form>
-					</td>
-					<td><!--更新ボタン-->
-						<form th:action="@{/todo/{taskId}/edit(taskId=${taskList.id})}" method="get">
-							<button>更新</button>
-						</form>
-					</td>
-					<td><!--削除ボタン-->
-						<form th:action="@{/todo/{taskId}/delete(taskId=${taskList.id})}" method="post"
-							onsubmit="return confirm('選択したタスクを削除しますか？')">
-							<button type="submit">削除</button>
-						</form>
-					</td>
-				</tr>
-			</table>
+		<div style="text-align: center;">
+			<h3 align="center"><a href="/todo/add">新規タスク作成</a></h3>
+			<a href="/todo">すべてのタスクを表示</a><br>
+				<th:block th:each="categories:${categories}">
+					優先度：
+					<a th:href="@{/todo/sort(category=${categories.priority})}">
+						<th:block th:text="${categories.priority}"></th:block>
+					</a>
+				</th:block><br>
+				期限ソート：
+				<a th:href="@{/todo(sort=Asc)}">昇順</a>
+				<a th:href="@{/todo(sort=Desc)}">降順</a>
+		</div>
+		<table class="box2">
+			<tr>
+				<th>NO</th>
+				<th>ToDo</th>
+				<th>優先度</th>
+				<th>期限</th>
+				<th>進捗状況</th>
+				<th>完了</th>
+				<th>変更</th>
+				<th>削除</th>
+			</tr>
+			<tr th:each="taskList:${tasks}">
+				<td th:text="${taskList.id}"></td> <!--タスクNO-->
+				<td th:text="${taskList.title}"></td> <!--件名-->
+				<!--↓優先度-->
+				<td th:if="${taskList.categoryId == 1}" th:text="高"></td>
+				<td th:if="${taskList.categoryId == 2}" th:text="中"></td>
+				<td th:if="${taskList.categoryId == 3}" th:text="低"></td>
+				<td th:text="${taskList.closingDate}" class="deadline"></td><!--期限-->
+				<!--↓進捗状況-->
+				<td th:if="${taskList.categoryId == 1}" th:text="未着手"></td>
+				<td th:if="${taskList.categoryId == 2}" th:text="進行中"></td>
+				<td th:if="${taskList.categoryId == 3}" th:text="完了"></td>
+				<td><!--完了ボタン-->
+					<form th:action="@{/todo/{taskId}/complete(taskId=${taskList.id})}" method="post">
+						<button>完了</button>
+					</form>
+				</td>
+				<td><!--更新ボタン-->
+					<form th:action="@{/todo/{taskId}/edit(taskId=${taskList.id})}" method="get">
+						<button>更新</button>
+					</form>
+				</td>
+				<td><!--削除ボタン-->
+					<form th:action="@{/todo/{taskId}/delete(taskId=${taskList.id})}" method="post"
+						onsubmit="return confirm('選択したタスクを削除しますか？')">
+						<button type="submit">削除</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+
+		<script src="/js/deadline.js"></script>
 	</body>
 
 	</html>

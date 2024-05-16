@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <htmel xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-</head>
-<body>
-	<header th:replace="header"></header>
-	<p>新規タスクの作成</p>
-	<form action="/todo/add" method="post">
-		<table border="2">
-			<tr>
-				<th>優先度</th>
-				<td>
-					<input type="radio" name="priority" value="1">高
-					<input type="radio" name="priority" value="2">中
-					<input type="radio"  name"priority" value="3">低
-				</td>
-			</tr>
-			<tr>
-				<th>件名</th>
-				<td><input type="text" name="title"></td>
-			</tr>
-			<tr>
-				<th>期限</th>
-				<td><input type="date" name="closingDate"></td>
-			</tr>
-			<tr>
-				<th>進捗状況</th>
-				<td>
-					<input type="radio" name="progress" value="1">未着手
-					<input type="radio" name="progress" value="2">進行中
-					<input type="radio"  name"progress" value="3">完了
-				</td>
-			</tr>
-			<tr>
-				<th>内容</th>
-				<td><textarea name="memo"></textarea></td>
-			</tr>
-		</table>
-		<button>新規作成</button>
-	</form>
-</body>
-</html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
+	</head>
+
+	<body>
+		<header th:replace="header"></header>
+		<p>新規タスクの作成</p>
+		<form action="/todo/add" method="post">
+			<table border="2">
+				<tr>
+					<th>優先度</th>
+					<td>
+						<input type="radio" name="priority" value="1">高
+						<input type="radio" name="priority" value="2">中
+						<input type="radio" name"priority" value="3">低
+					</td>
+				</tr>
+				<tr>
+					<th>件名</th>
+					<td><input type="text" name="title" class="textbox"></td>
+				</tr>
+				<tr>
+					<th>期限</th>
+					<td><input type="date" name="closingDate" class="textbox"></td>
+				</tr>
+				<tr>
+					<th>進捗状況</th>
+					<td>
+						<input type="radio" name="progress" value="1">未着手
+						<input type="radio" name="progress" value="2">進行中
+						<input type="radio" name"progress" value="3">完了
+					</td>
+				</tr>
+				<tr>
+					<th>一言コメント</th>
+					<td><textarea name="memo" class="textbox"></textarea></td>
+				</tr>
+			</table>
+			<button>新規作成</button>
+		</form>
+	</body>
+
+	</html>

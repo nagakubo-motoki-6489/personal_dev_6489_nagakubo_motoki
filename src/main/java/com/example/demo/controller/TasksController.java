@@ -24,23 +24,35 @@ public class TasksController {
 
 	@Autowired
 	CategoryRepository categoryRepository;
-	
+
 	java.util.Date utilDate;
-	
-	
 
 	//ホーム表示
 	@GetMapping("/todo")
-	public String tasksView(Model model) {
+	public String tasksView(
+			@RequestParam(name = "sort", defaultValue = "") String sort,
+			Model model) {
+
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 
-		List<Tasks> taskListAll = taskRepository.findAll();
-		model.addAttribute("tasks", taskListAll);
-		
-		return "tasks";
-	}
+		if (sort.equals("Asc")) {
+			List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateAsc();
+			model.addAttribute("tasks", taskListAll);
 
+			return "tasks";
+		} else if (sort.equals("Desc")) {
+			List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateDesc();
+			model.addAttribute("tasks", taskListAll);
+
+			return "tasks";
+		} else {
+			List<Tasks> taskListAll = taskRepository.findAll();
+			model.addAttribute("tasks", taskListAll);
+
+			return "tasks";
+		}
+	}
 
 	//タスク追加
 	@GetMapping("/todo/add")
@@ -58,7 +70,7 @@ public class TasksController {
 			Model model) {
 		Tasks task = new Tasks(priority, title, closingDate, progress, memo);
 		taskRepository.save(task);
-		
+
 		return "redirect:/todo";
 	}
 
@@ -116,10 +128,10 @@ public class TasksController {
 	public String sort(
 			@RequestParam(name = "category", defaultValue = "") String priority,
 			Model model) {
-		
+
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
-		
+
 		switch (priority) {
 		case "高":
 			List<Tasks> taskListHigh = taskRepository.findByCategoryIdIs(1);
@@ -143,5 +155,3 @@ public class TasksController {
 		}
 	}
 }
-
-

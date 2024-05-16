@@ -7,7 +7,7 @@
 </head>
 <body>
 	<header th:replace="header"></header>
-	<p>タスク更新</p>
+	<div style="text-align: center;"><h2>タスク更新</h2></div>
 	<th:block th:if="${nullDateMessage}"><font color="red">[[${nullDateMessage}]]</font><br></th:block>
 	<form th:action="@{/todo/{taskId}/edit(taskId=${task.id})}" method="post">
 		<table border="2">
@@ -21,7 +21,7 @@
 			</tr>
 			<tr>
 				<th>件名</th>
-				<td><input type="text" name="title"></td>
+				<td><input type="text" name="title" class="textbox"></td>
 			</tr>
 			<tr>
 				<th>期限</th>
@@ -36,8 +36,8 @@
 				</td>
 			</tr>
 			<tr>
-				<th>内容</th>
-				<td><textarea name="memo"></textarea></td>
+				<th>一言コメント</th>
+				<td><textarea name="memo" class="textbox"></textarea></td>
 			</tr>
 		</table>
 		<button>更新</button>

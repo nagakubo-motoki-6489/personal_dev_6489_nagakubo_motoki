@@ -1,32 +1,37 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
 * {
-   box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-   margin: 0;
-   padding: 0;
-   font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ, Meiryo, "ＭＳ Ｐゴシック", "Helvetica Neue", Helvetica, Arial, sans-serif;
-   background-color: #e6e6e6;
+	margin: 0;
+	padding: 0;
+	font-family: "Yusei Magic", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	background-color: #e6e6e6;
 }
+
 header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 	line-height: 60px;
-	background: #3c3c3c;
+	background: rgb(128, 128, 128);
 	vertical-align: middle;
 }
 
 /* ロゴ */
 header .logo {
-    padding: 0 20px;
-    font-size: 18px;
-    color: #fff;
-    letter-spacing: .2em;
-    width: 30%;
-    display:inline;
+	padding: 0 20px;
+	font-size: 18px;
+	color: rgb(255, 255, 255);
+	letter-spacing: .2em;
+	width: 30%;
+	display: inline;
 }
 
 /* メニュー */
@@ -39,30 +44,33 @@ header.account {
 	text-align: right;
 	color: #fff;
 }
+
 /* メニューのリンクホバーで線 */
-header  a:hover {
+header a:hover {
 	text-decoration: underline;
 }
 
-
+/*テーブルデザイン*/
 table {
-    padding: 0.5em 1em;
-    margin: auto;
-    background: #f4f4f4;
-    border-left: solid 6px #5bb7ae;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
+	padding: 0.5em 1em;
+	margin: auto;
+	background: #f4f4f4;
+	border-left: solid 6px #5bb7ae;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
 }
- 
+
 
 th {
-	border:dotted  rgb(192, 192, 192);
-   border-width:1px 0 1px 0 ;
-    }
-td {
-	border:dotted  rgb(192, 192, 192);
-   border-width:0 1px 0 0 ;
-    }
+	border: dotted rgb(192, 192, 192);
+	border-width: 1px 0 1px 0;
+}
 
+td {
+	border: dotted rgb(192, 192, 192);
+	border-width: 0 1px 0 0;
+}
+
+/*ボタンデザイン*/
 button {
 	display: block;
 	text-align: center;
@@ -75,9 +83,66 @@ button {
 	color: rgb(0, 0, 0);
 	border-radius: 100vh;
 	transition: 0.5s;
+	font-family: "Yusei Magic", sans-serif;
 }
+
 
 button:hover {
 	color: #fff;
 	background: #27acd9;
+}
+
+/*期限がヤバい時の縁取り文字*/
+.warning {
+	border-radius: 10px;
+	color: #000;
+	text-shadow: 1px 1px 0 #FFF, -1px -1px 0 #FFF,
+		-1px 1px 0 #FFF, 1px -1px 0 #FFF,
+		0px 1px 0 #FFF, 0-1px 0 #FFF,
+		-1px 0 0 #FFF, 1px 0 0 #FFF;
+}
+
+/*テキストボックスのデザイン*/
+.textbox {
+	width: 100%;
+	/*親要素いっぱい広げる*/
+	padding: 10px 15px;
+	/*ボックスを大きくする*/
+	font-size: 16px;
+	border-radius: 3px;
+	/*ボックス角の丸み*/
+	border: 2px solid #ddd;
+	/*枠線*/
+	box-sizing: border-box;
+	/*横幅の解釈をpadding, borderまでとする*/
+}
+
+.textbox:focus {
+	border: 2px solid #27acd9;
+	z-index: 10;
+	outline: 0;
+}
+
+/*見出しデザイン*/
+p {
+	color: #364e96;
+	/*文字色*/
+	/*border: solid 3px #364e96;/*線色*/
+	padding: 0.5em;
+	/*文字周りの余白*/
+	/*border-radius: 0.5em;/*角丸*/
+	width: 30%;
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+	font-family: "Hannotate SC";
+}
+
+/*リンク文字の色*/
+a {
+    color: #3583aa;
+}
+
+a:visited {
+    color: rgb(0, 128, 64);
 }
