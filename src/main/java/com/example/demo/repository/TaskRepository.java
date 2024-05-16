@@ -10,9 +10,14 @@ public interface TaskRepository extends JpaRepository<Tasks, Integer> {
 	
 	List<Tasks> findByCategoryIdIs(Integer categoryId);
 	
+	List<Tasks> findByProgressIs(Integer progress);
+	
+	List<Tasks> findByProgressIsNot(Integer progress);
+	
 	List<Tasks> findAllByOrderByClosingDateAsc();
 	
 	List<Tasks> findAllByOrderByClosingDateDesc();
+	
 	
 	
 }

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <htmel xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<header>	
-	<h1 class="logo" onclick="clickToTop()">ToDoリスト</h1>
-	<div  class="account">
-		<th:block th:if="${@account.name}"><span style="color: deepskyblue;" th:text="${@account.name} + 'でログイン中'"></span></th:block>
-		<a href="/login" class="warning">ログアウト</a>
-	</div>
-	</header>
-	
-	<script src="/js/clickToTop.js"></script>
-</body>
-</html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+
+	<body>
+		<header>
+			<h1 class="logo" onclick="clickToTop()">ToDoリスト</h1>
+			<div class="account">
+				<th:block th:if="${@account.name}"><span style="color: deepskyblue;"
+						th:text="${@account.name} + 'でログイン中'"></span></th:block>
+				<a href="/login" class="warning">ログアウト</a>
+			</div>
+		</header>
+
+		<script src="/js/clickToTop.js"></script>
+	</body>
+
+	</html>

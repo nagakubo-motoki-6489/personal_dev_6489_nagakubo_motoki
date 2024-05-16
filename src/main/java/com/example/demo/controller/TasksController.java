@@ -35,19 +35,24 @@ public class TasksController {
 
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
+		
+		List<Tasks> completeTasks = taskRepository.findByProgressIs(3);
+		model.addAttribute("completeTasks", completeTasks);
 
 		if (sort.equals("Asc")) {
 			List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateAsc();
+			taskListAll.removeAll(taskRepository.findByProgressIs(3));
 			model.addAttribute("tasks", taskListAll);
-
+			
 			return "tasks";
 		} else if (sort.equals("Desc")) {
 			List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateDesc();
+			taskListAll.removeAll(taskRepository.findByProgressIs(3));
 			model.addAttribute("tasks", taskListAll);
 
 			return "tasks";
 		} else {
-			List<Tasks> taskListAll = taskRepository.findAll();
+			List<Tasks> taskListAll = taskRepository.findByProgressIsNot(3);
 			model.addAttribute("tasks", taskListAll);
 
 			return "tasks";
@@ -122,6 +127,17 @@ public class TasksController {
 		taskRepository.save(task);
 		return "redirect:/todo";
 	}
+	
+	//未完了
+	@PostMapping("/todo/{taskId}/notComplete")
+	public String noComplete(
+			@PathVariable("taskId") Integer taskId,
+			Model model) {
+		Tasks task = taskRepository.findById(taskId).get();
+		task.setProgress(1);
+		taskRepository.save(task);
+		return "redirect:/todo";
+	}
 
 	//指定検索
 	@GetMapping("/todo/sort")
@@ -135,16 +151,19 @@ public class TasksController {
 		switch (priority) {
 		case "高":
 			List<Tasks> taskListHigh = taskRepository.findByCategoryIdIs(1);
+			taskListHigh.removeAll(taskRepository.findByProgressIs(3));
 			model.addAttribute("tasks", taskListHigh);
 			return "tasks";
 
 		case "中":
 			List<Tasks> taskListMiddle = taskRepository.findByCategoryIdIs(2);
+			taskListMiddle.removeAll(taskRepository.findByProgressIs(3));
 			model.addAttribute("tasks", taskListMiddle);
 			return "tasks";
 
 		case "低":
 			List<Tasks> taskListLow = taskRepository.findByCategoryIdIs(3);
+			taskListLow.removeAll(taskRepository.findByProgressIs(3));
 			model.addAttribute("tasks", taskListLow);
 			return "tasks";
 

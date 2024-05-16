@@ -14,12 +14,23 @@ body {
 	background-color: #e6e6e6;
 }
 
+/*ヘッダー*/
 header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 	line-height: 60px;
+	background: rgb(128, 128, 128);
+	vertical-align: middle;
+}
+
+/*フッター*/
+footer {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	width: 100%;
 	background: rgb(128, 128, 128);
 	vertical-align: middle;
 }
@@ -140,9 +151,49 @@ p {
 
 /*リンク文字の色*/
 a {
-    color: #3583aa;
+	color: #3583aa;
 }
 
 a:visited {
-    color: rgb(0, 128, 64);
+	color: rgb(0, 128, 64);
+}
+
+/*マウスオーバーによる吹き出し表示*/
+
+.tooltipBlock {
+    position: relative;
+}
+
+.toolTip {
+    display: none;
+    position: unset;
+    top: -100%; /* 上に表示されるように top を調整 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    background: #545454;
+    padding: 4px 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.8;
+    animation: fadeIn 0.6s;
+    color: #FFF;
+    border-radius: 3px;
+    filter: drop-shadow(0px 1px 4px #aaa);
+}
+.toolTip:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border: 8px solid transparent;
+    border-top: 8px solid #545454;
+}
+
+
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }
