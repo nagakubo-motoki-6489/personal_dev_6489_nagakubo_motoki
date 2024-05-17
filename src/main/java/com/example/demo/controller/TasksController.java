@@ -128,6 +128,17 @@ public class TasksController {
 		return "redirect:/todo";
 	}
 	
+	//進行中
+	@PostMapping("/todo/{taskId}/onTime")
+	public String onTime(
+			@PathVariable("taskId") Integer taskId,
+			Model model) {
+		Tasks task = taskRepository.findById(taskId).get();
+		task.setProgress(2);
+		taskRepository.save(task);
+		return "redirect:/todo";
+	}
+	
 	//未完了
 	@PostMapping("/todo/{taskId}/notComplete")
 	public String noComplete(
@@ -139,7 +150,7 @@ public class TasksController {
 		return "redirect:/todo";
 	}
 
-	//指定検索
+	//指定検索(優先度)
 	@GetMapping("/todo/sort")
 	public String sort(
 			@RequestParam(name = "category", defaultValue = "") String priority,
@@ -167,6 +178,32 @@ public class TasksController {
 			model.addAttribute("tasks", taskListLow);
 			return "tasks";
 
+		default:
+			List<Tasks> taskListAll = taskRepository.findAll();
+			model.addAttribute("tasks", taskListAll);
+			return "tasks";
+		}
+	}
+	//指定検索(進捗度)
+	@GetMapping("/todo/progress")
+	public String sort(
+			@RequestParam(name = "progress", defaultValue = "") Integer progress,
+			Model model) {
+		
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+		
+		switch (progress) {
+		case 1:
+			List<Tasks> taskListUntil = taskRepository.findByProgressIs(1);
+			model.addAttribute("tasks", taskListUntil);
+			return "tasks";
+			
+		case 2:
+			List<Tasks> taskListNow = taskRepository.findByProgressIs(2);
+			model.addAttribute("tasks", taskListNow);
+			return "tasks";
+			
 		default:
 			List<Tasks> taskListAll = taskRepository.findAll();
 			model.addAttribute("tasks", taskListAll);

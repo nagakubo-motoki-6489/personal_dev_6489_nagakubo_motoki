@@ -18,9 +18,11 @@ function isDeadlineNear(deadline) {
     var twoDaysLater = new Date();
     twoDaysLater.setDate(twoDaysLater.getDate() + 2);
 
+
     var deadlineDate = new Date(deadline.textContent);
 
     // 確認用コンソール（正しく処理されているか）
+    console.log(deadline.textContent);
     console.log(deadlineDate);
     console.log(twoDaysLater);
     console.log(deadlineDate <= twoDaysLater);

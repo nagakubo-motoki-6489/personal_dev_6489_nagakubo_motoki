@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	<h1>新規ユーザー登録</h1>
+	<h1 style="text-align: center;">新規ユーザー登録</h1>
 	<th:block th:if="${nullNameMessage}"><font color="red">[[${nullNameMessage}]]</font><br></th:block>
 	<th:block th:if="${nullEmailMessage}"><font color="red">[[${nullEmailMessage}]]</font><br></th:block>
 	<th:block th:if="${nullPassMessage}"><font color="red">[[${nullPassMessage}]]</font><br></th:block>
@@ -14,20 +14,21 @@
 	<form action="/todo/userAdd" method="post">
 		<table>
 			<tr>
-				名前　　　　　　　　：<input type="text" name="name" class="textbox">
-			</tr><br>
+				<th>名前：<input type="text" name="name" class="textbox"></th>
+			</tr>
 			<tr>
-				メールアドレス　　　：<input type="text" name="email" class="textbox">
-			</tr><br>
+				<th>メールアドレス：<input type="text" name="email" class="textbox"></th>
+			</tr>
 			<tr>
-				パスワード　　　　　：<input type="text" name="pass" class="textbox">
-			</tr><br>
+				<th>パスワード：<input type="text" name="pass" class="textbox"></th>
+			</tr>
 			<tr>
-				パスワード（確認用）：<input type="text" name="passCheck" class="textbox">
+				<th>パスワード（確認用）：<input type="text" name="passCheck" class="textbox"></th>
 			</tr>
 		</table>
-		<p>以上の内容で登録する場合は下のボタンを押してください</p>
+		<h3 style="text-align: center;">以上の内容で登録する場合は下のボタンを押してください</h3>
 		<button>新規登録</button>
 	</form>
+	<footer th:replace="footer"></footer>
 </body>
 </html>

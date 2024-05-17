@@ -1,6 +1,5 @@
 const target = document.querySelectorAll('[id^="tooltipButton"]');
 const popup = document.querySelectorAll('[id^="toolTip"]');
-console.log(target);
 console.log(popup);
 
 

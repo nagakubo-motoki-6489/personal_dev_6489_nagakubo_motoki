@@ -4,11 +4,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="icon" href="/favicon.ico/icon.ico" type="image/ico">
 	</head>
 
 	<body>
 		<header>
-			<h1 class="logo" onclick="clickToTop()">ToDoリスト</h1>
+			<h1 class="logo" onclick="clickToTop()">とぅどぅくん</h1>
+			<img src="/img/head.png" id="head" onclick="clickToTop()">
 			<div class="account">
 				<th:block th:if="${@account.name}"><span style="color: deepskyblue;"
 						th:text="${@account.name} + 'でログイン中'"></span></th:block>

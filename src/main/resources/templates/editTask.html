@@ -21,11 +21,11 @@
 			</tr>
 			<tr>
 				<th>件名</th>
-				<td><input type="text" name="title" class="textbox"></td>
+				<td><input type="text" name="title" class="textbox" th:value="${task.title}"></td>
 			</tr>
 			<tr>
 				<th>期限</th>
-				<td><input type="date" name="closingDate"></td>
+				<td><input type="date" name="closingDate" th:value="${task.closingDate}"></td>
 			</tr>
 			<tr>
 				<th>進捗状況</th>
@@ -37,10 +37,11 @@
 			</tr>
 			<tr>
 				<th>一言コメント</th>
-				<td><textarea name="memo" class="textbox"></textarea></td>
+				<td><textarea name="memo" class="textbox" th:text="${task.memo}"></textarea></td>
 			</tr>
 		</table>
 		<button>更新</button>
 	</form>
+	<footer th:replace="footer"></footer>
 </body>
 </html>

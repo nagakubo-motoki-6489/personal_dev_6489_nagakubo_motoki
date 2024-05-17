@@ -5,6 +5,7 @@ INSERT INTO categories(priority) VALUES('低');
 
 -- ユーザーテーブルデータ
 INSERT INTO users ( email, name, password) VALUES('tanaka@aaa.com', '田中太郎', 'test123');
+INSERT INTO users ( email, name, password) VALUES('yamatai@country.com', 'やまだ', 'tyekerattyo');
 
 -- タスクテーブルデータ
 INSERT INTO tasks(category_id, title, closing_date, progress, memo) VALUES(1, 'お試し', '2024-10-30', 1, 'test');
