@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/bodyStyle.css">
 </head>
 <body>
-	<header th:replace="header"></header>
 	<h1 align="center">ログイン</h2>
-	<th:block th:if="${nullEmailMessage}"><font color="red">[[${nullEmailMessage}]]</font><br></th:block>
-	<th:block th:if="${nullPassMessage}"><font color="red">[[${nullPassMessage}]]</font><br></th:block>
-	<th:block th:if="${noInfoMessage}"><font color="red">[[${noInfoMessage}]]</font><br></th:block>
+	<div style="text-align: center;">
+		<th:block th:if="${nullEmailMessage}"><font color="red">[[${nullEmailMessage}]]</font><br></th:block>
+		<th:block th:if="${nullPassMessage}"><font color="red">[[${nullPassMessage}]]</font><br></th:block>
+		<th:block th:if="${noInfoMessage}"><font color="red">[[${noInfoMessage}]]</font><br></th:block>
+	</div>
 	<form action="/login" method="post">
 		<table >
 			<tr>
@@ -24,6 +25,5 @@
 	</form>
 	<h3 align="center"><a href="/todo/userAdd">新規登録はこちらから</a></h3>
 	<div style="text-align:center;"><a href="/todo">ログインせずに進む</a></div>
-	<footer th:replace="footer"></footer>
 </body>
 </html>

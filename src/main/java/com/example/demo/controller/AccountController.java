@@ -30,11 +30,8 @@ public class AccountController {
 	//ログイン
 	@GetMapping({ "/", "/login" })
 	public String top() {
-		session.invalidate();
 		return "login";
-		
 	}
-	
 	
 	@PostMapping("/login")
 	public String loginTasksView(
@@ -68,6 +65,13 @@ public class AccountController {
 		account.setName(user.getName());
 		
 		return "redirect:/todo";
+	}
+	
+	//ログアウト
+	@GetMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "login";
 	}
 
 	//ユーザー登録
@@ -112,5 +116,27 @@ public class AccountController {
 		userRepository.save(user);
 		
 		return "login";
+	}
+	
+	//アカウント削除
+	@GetMapping("/todo/account/delete")
+	public String deleteAccountGet(Model model) {
+		try {userRepository.findById(account.getId()).get();}
+			catch(Exception E) {
+				model.addAttribute("loginNeed", "ログインが必要です");
+				return "loginNeed";
+		}
+		return "deleteAccount";
+	} 
+	
+	@PostMapping("/todo/account/delete")
+	public String deleteAccountPost(Model model) {
+		try {User deleteUser = userRepository.findById(account.getId()).get();
+			userRepository.delete(deleteUser);
+			return "deleteSuccess";}
+		catch(Exception E) {
+			model.addAttribute("loginNeed", "ログインが必要です");
+			return "loginNeed";
+			}
 	}
 }

@@ -4,13 +4,16 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<link rel="stylesheet" type="text/css" href="/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/css/bodyStyle.css">
 	</head>
 
 	<body>
 		<header th:replace="header"></header>
-		<p>新規タスクの作成</p>
-		<form action="/todo/add" method="post">
+		<h2 style="text-align: center;">新規タスクの作成</h2>
+		<div>
+			<th:block th:if="${error}"><font color="red">[[${error}]]</font><br></th:block>
+		</div>
+		<form action="/todo/add" method="post" id="addTaskForm">
 			<table border="2">
 				<tr>
 					<th>優先度</th>
@@ -22,11 +25,11 @@
 				</tr>
 				<tr>
 					<th>件名</th>
-					<td><input type="text" name="title" class="textbox"></td>
+					<td><input type="text" name="title" class="textbox" id="task"></td>
 				</tr>
 				<tr>
 					<th>期限</th>
-					<td><input type="date" name="closingDate" class="textbox"></td>
+					<td><input type="date" name="closingDate" class="textbox" id="date"></td>
 				</tr>
 				<tr>
 					<th>進捗状況</th>
@@ -44,6 +47,8 @@
 			<button>新規作成</button>
 		</form>
 		<footer th:replace="footer"></footer>
+		
+		<script src="/js/dateCheck.js"></script>
 	</body>
 
 	</html>

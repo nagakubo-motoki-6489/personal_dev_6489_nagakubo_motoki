@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+/*ハンバーガーボタン*/
+.hamburger {
+  width: 40px;
+  height: 80px;
+  position: relative;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(128, 128, 128);
+  cursor: pointer;
+}
+button.hamburger:hover {
+	background-color: rgb(128, 128, 128);
+}
+
+.hamburger span,
+.hamburger span::after,
+.hamburger span::before {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.5s;
+}
+.hamburger span::before {
+  top: -10px;
+}
+.hamburger span::after {
+  bottom: -10px;
+}
+/*ハンバーガーがクリックされたら（JSが干渉する場所）*/
+.hamburger.open span {
+  background-color: transparent;
+}
+.hamburger.open span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.hamburger.open span::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+/*実際のメニュー*/
+.nav {
+  position: fixed;
+  width: 30%;
+  height: 100vh;
+  /*top: 80px;*/
+  right: -100%;
+  background-color: rgb(128, 128, 128, 0.87);
+  /*padding: 50px 0;*/
+  transition: all 0.5s;
+  border-top: 1px solid #fff;
+}
+.nav__item a {
+  display: block;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  padding: 20px 0 20px 50px;
+  text-transform: uppercase;
+}
+.nav__item a:visited {
+  display: block;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  padding: 20px 0 20px 50px;
+  text-transform: uppercase;
+}
+.nav__item a:hover {
+  color: #0f5474;
+  background-color: #fff;
+}
+.nav.open {
+  right: 0;
+}
+
+/*リストの点を消す*/
+ul {
+  list-style: none;
+}

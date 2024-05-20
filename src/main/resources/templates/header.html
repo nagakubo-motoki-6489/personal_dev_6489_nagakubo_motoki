@@ -5,6 +5,8 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<link rel="icon" href="/favicon.ico/icon.ico" type="image/ico">
+		<link rel="stylesheet" type="text/css" href="/css/headerStyle.css">
+		<link rel="stylesheet" type="text/css" href="/css/hamburgerStyle.css">
 	</head>
 
 	<body>
@@ -12,13 +14,26 @@
 			<h1 class="logo" onclick="clickToTop()">とぅどぅくん</h1>
 			<img src="/img/head.png" id="head" onclick="clickToTop()">
 			<div class="account">
-				<th:block th:if="${@account.name}"><span style="color: deepskyblue;"
+				<button type="button" class="hamburger">
+					<span></span>
+				</button>
+				<nav class="nav">
+					<th:block th:if="${@account.name}">
+					<span style="color: deepskyblue;
+					text-shadow: 1px 1px 0 #FFF, -1px -1px 0 #FFF,-1px 1px 0 #FFF, 1px -1px 0
+					 #FFF,0px 1px 0 #FFF, 0-1px 0 #FFF,-1px 0 0 #FFF, 1px 0 0 #FFF;"
 						th:text="${@account.name} + 'でログイン中'"></span></th:block>
-				<a href="/login" class="warning">ログアウト</a>
+					<ul class="nav__list">
+						<li class="nav__item"><a href="/login">ログイン</a></li>
+						<li class="nav__item"><a href="/logout">ログアウト</a></li>
+						<li class="nav__item"><a href="/todo/account/delete">アカウント削除</a></li>
+					</ul>
+				</nav>
 			</div>
 		</header>
 
 		<script src="/js/clickToTop.js"></script>
+		<script src="/js/hamburger.js"></script>
 	</body>
 
 	</html>

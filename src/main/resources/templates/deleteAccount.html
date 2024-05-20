@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<htmel xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/bodyStyle.css">
+</head>
+
+<body>
+	<header th:replace="header"></header>
+	
+	<h2 style="color: red; text-align: center;">アカウント削除確認</h2>
+	
+	<div style="text-align: center;">
+		アカウントを削除しますか？<br>
+		<form action="/todo/account/delete" method="post">
+			<button>はい</button>
+		</form>
+		「はい」を押してしまうと、操作が戻せなくなります<br>
+		<a href="/todo">トップへ戻る</a>
+	</div>
+	
+	<footer th:replace="footer"></footer>
+</body>
+</html>
