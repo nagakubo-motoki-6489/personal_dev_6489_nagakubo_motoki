@@ -9,16 +9,16 @@
 	<header th:replace="header"></header>
 	<div style="text-align: center;">
 		<h2>タスク更新</h2>
-		<th:block th:if="${nullDateMessage}"><font color="red">[[${nullDateMessage}]]</font><br></th:block>
+		<th:block th:if="${nullMessage}"><font color="red">[[${nullMessage}]]</font><br></th:block>
 	</div>
 	<form th:action="@{/todo/{taskId}/edit(taskId=${task.id})}" method="post">
 		<table border="2">
 			<tr>
 				<th>優先度</th>
 				<td>
-					<input type="radio" name="priority" value="1">高
-					<input type="radio" name="priority" value="2">中
-					<input type="radio" name="priority" value="3">低
+					<input type="radio" name="priority" value="1" class="priority">高
+					<input type="radio" name="priority" value="2" class="priority">中
+					<input type="radio" name="priority" value="3" class="priority">低
 				</td>
 			</tr>
 			<tr>
@@ -32,9 +32,9 @@
 			<tr>
 				<th>進捗状況</th>
 				<td>
-					<input type="radio" name="progress" value="1">未着手
-					<input type="radio" name="progress" value="2">進行中
-					<input type="radio" name="progress" value="3">完了
+					<input type="radio" name="progress" value="1" class="progress">未着手
+					<input type="radio" name="progress" value="2" class="progress">進行中
+					<input type="radio" name="progress" value="3" class="progress">完了
 				</td>
 			</tr>
 			<tr>

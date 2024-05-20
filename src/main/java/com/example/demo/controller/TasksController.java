@@ -74,6 +74,10 @@ public class TasksController {
 			@RequestParam(name = "progress", defaultValue = "") Integer progress,
 			@RequestParam(name = "memo", defaultValue = "") String memo,
 			Model model) {
+		if (priority == null || progress == null || memo == null) {
+			model.addAttribute("nullMessage", "全ての情報を入力してください");
+			return "addTask";
+		}
 		Tasks task = new Tasks(priority, title, closingDate, progress, memo);
 		taskRepository.save(task);
 
@@ -99,8 +103,10 @@ public class TasksController {
 			@RequestParam(name = "progress", defaultValue = "") Integer progress,
 			@RequestParam(name = "memo", defaultValue = "") String memo,
 			Model model) {
-		if (closingDate == null) {
-			model.addAttribute("nullDateMessage", "日付の入力は必須です");
+		if (priority == null || closingDate == null || title == null || progress == null) {
+			Tasks task = taskRepository.findById(taskId).get();
+			model.addAttribute("task", task);
+			model.addAttribute("nullMessage", "全ての情報を入力してください");
 			return "editTask";
 		}
 		Tasks task = new Tasks(taskId, priority, title, closingDate, progress, memo);
