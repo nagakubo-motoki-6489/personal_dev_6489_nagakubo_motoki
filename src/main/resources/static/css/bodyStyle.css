@@ -168,6 +168,16 @@ a:visited {
 	color: rgb(0, 128, 64);
 }
 
+.sort {
+	text-decoration: none;
+	color: #5bb7ae;
+}
+
+.sort:visited {
+	text-decoration: none;
+	color: #5bb7ae;
+}
+
 /*テーマ切り替え*/
 :root {
     --s-1: 0 2px 5px rgba(0, 0, 0, 0.26);

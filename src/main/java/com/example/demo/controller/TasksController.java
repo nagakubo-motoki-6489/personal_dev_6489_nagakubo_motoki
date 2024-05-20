@@ -52,7 +52,8 @@ public class TasksController {
 
 			return "tasks";
 		} else {
-			List<Tasks> taskListAll = taskRepository.findByProgressIsNot(3);
+			List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateAsc();
+			taskListAll.removeAll(taskRepository.findByProgressIs(3));
 			model.addAttribute("tasks", taskListAll);
 
 			return "tasks";

@@ -16,7 +16,7 @@
 .toolTip1 {
     display: none;
     position: absolute;
-    top: 48%; 
+    top: 45%; 
     left: 28%;
     transform: translateX(-50%);
     z-index: 1;
@@ -33,7 +33,7 @@
 .toolTip2 {
     display: none;
     position: absolute;
-    top: 106%; 
+    top: 103%; 
     left: 28%;
     transform: translateX(-50%);
     z-index: 1;

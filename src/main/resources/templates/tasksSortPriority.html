@@ -26,7 +26,7 @@
 		<h2 style="text-align: center;">未完了のタスク一覧</h2>
 		<table class="box2">
 			<tr>
-				<th><a th:href="@{/todo(sort=Asc)}" class="sort">∧</a>期限<a th:href="@{/todo(sort=Desc)}" class="sort">∨</a></th>
+				<th><a th:href="@{/todo/priority(sort=Asc)}" class="sort">∧</a>期限<a th:href="@{/todo/priority(sort=Desc)}" class="sort">∨</a></th>
 				<th>ToDo</th>
 				<th>優先度</th>
 				<th>進捗状況</th>
@@ -52,18 +52,18 @@
 				<td th:if="${taskList.progress == 3}" th:text="完了"></td>
 				<td><!--完了ボタン-->
 					<form th:action="@{/todo/{taskId}/complete(taskId=${taskList.id})}" method="post">
-						<button><img src="/img/check.png"></button>
+						<button>完了</button>
 					</form>
 				</td>
 				<td><!--更新ボタン-->
 					<form th:action="@{/todo/{taskId}/edit(taskId=${taskList.id})}" method="get">
-						<button><img src="/img/change.png"></button>
+						<button>更新</button>
 					</form>
 				</td>
 				<td><!--削除ボタン-->
 					<form th:action="@{/todo/{taskId}/delete(taskId=${taskList.id})}" method="post"
 						onsubmit="return confirm('選択したタスクを削除しますか？')">
-						<button type="submit"><img src="/img/dust.png"></button>
+						<button type="submit">削除</button>
 					</form>
 				</td>
 				<td><!--進行中ボタン-->
@@ -115,13 +115,13 @@
 				</td>
 				<td><!--更新ボタン-->
 					<form th:action="@{/todo/{taskId}/edit(taskId=${taskList.id})}" method="get">
-						<button><img src="/img/change.png"></button>
+						<button>更新</button>
 					</form>
 				</td>
 				<td><!--削除ボタン-->
 					<form th:action="@{/todo/{taskId}/delete(taskId=${taskList.id})}" method="post"
 						onsubmit="return confirm('選択したタスクを削除しますか？')">
-						<button type="submit"><img src="/img/dust.png"></button>
+						<button type="submit">削除</button>
 					</form>
 				</td>
 				<td><!--進行中ボタン-->
