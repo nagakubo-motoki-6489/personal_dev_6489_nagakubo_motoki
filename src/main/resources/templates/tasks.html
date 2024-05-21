@@ -92,8 +92,8 @@
 		<hr class="cp_hr08">
 
 		
-		<h2 th:if="${#lists.size(completeTasks)}>0" style="text-align: center;">完了したタスク一覧</h2>
-		<table  th:if="${#lists.size(completeTasks)}>0" class="box2">
+		<h2 th:if="${completeTasks != null}" style="text-align: center;">完了したタスク一覧</h2>
+		<table th:if="${completeTasks != null}" class="box2">
 			<tr>
 				<th>NO</th>
 				<th>期限</th>
