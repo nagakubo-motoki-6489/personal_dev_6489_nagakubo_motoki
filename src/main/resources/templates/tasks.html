@@ -10,12 +10,16 @@
 
 	<body>
 		<header th:replace="header"></header>
+		<br>
+		<br>
+		<br>
+		<br>
 		<div style="text-align: center;">
 			<h3 align="center"><a href="/todo/add" >◇新規タスク作成</a></h3>
 			<a href="/todo">□すべてのタスクを表示</a><br>
 				<th:block th:each="categories:${categories}">
 					優先度：
-					<a th:href="@{/todo/sort(category=${categories.priority})}">
+					<a th:href="@{/todo/sort(category=${categories.id})}">
 						<th:block th:text="${categories.priority}"></th:block>
 					</a>
 				</th:block><br>
@@ -24,9 +28,9 @@
 				完了：<img src="/img/goodsign.png" onclick="clickToTop()">
 		</div>
 		<h2 style="text-align: center;">未完了のタスク一覧</h2>
-		<table class="box2">
+		<table class="box2" id="noCompleteTable">
 			<tr>
-				<th><a th:href="@{/todo(sort=Asc)}" class="sort">∧</a>期限<a th:href="@{/todo(sort=Desc)}" class="sort">∨</a></th>
+				<th  class="sort" onclick="sortRows()"><a th:href="@{/todo/sort(category=${categoryId},sort=Asc)}" class="sort">∧</a>期限<a th:href="@{/todo/sort(category=${categoryId},sort=Desc)}" class="sort">∨</a></th>
 				<th>ToDo</th>
 				<th>優先度</th>
 				<th>進捗状況</th>
@@ -85,8 +89,11 @@
 		<img src="/img/redbox.png">：期限切れ <span style="color: red;">ヤバいです！</span><br>
 		</div>
 		
-		<h2 th:if="${completeTasks != null}" style="text-align: center;">完了したタスク一覧</h2>
-		<table th:if="${completeTasks != null}" class="box2">
+		<hr class="cp_hr08">
+
+		
+		<h2 th:if="${#lists.size(completeTasks)}>0" style="text-align: center;">完了したタスク一覧</h2>
+		<table  th:if="${#lists.size(completeTasks)}>0" class="box2">
 			<tr>
 				<th>NO</th>
 				<th>期限</th>
@@ -137,12 +144,15 @@
 			</tr>
 		</table>
 		<br>
+		<div style="text-align: end;"><img src="/img/easterEgg.png" onclick="clickToGame()"></div>
+		<br>
 		<footer th:replace="footer"></footer>
 
 		<script src="/js/deadline.js"></script>
 		<script src="/js/memoTip.js"></script>
 		<script src="/js/clickShowProgress.js"></script>
 		<script src="/js/priorityBorder.js"></script>
+		<script src="/js/Game/toGame.js"></script>
 	</body>
 
 	</html>

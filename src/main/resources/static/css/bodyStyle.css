@@ -34,6 +34,12 @@ td {
 	border-width: 0 1px 0 0;
 }
 
+/*区切り線*/
+.cp_hr08 {
+	border-top: 1px dashed #8c8b8b;
+	border-bottom: 1px dashed #ffffff;
+}
+
 /*ボタンデザイン*/
 button {
 	display: block;

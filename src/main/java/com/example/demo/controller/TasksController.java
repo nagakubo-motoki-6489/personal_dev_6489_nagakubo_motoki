@@ -35,29 +35,16 @@ public class TasksController {
 
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
-		
+
 		List<Tasks> completeTasks = taskRepository.findByProgressIs(3);
+		System.out.println(completeTasks.size());
 		model.addAttribute("completeTasks", completeTasks);
 
-		if (sort.equals("Asc")) {
-			List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateAsc();
-			taskListAll.removeAll(taskRepository.findByProgressIs(3));
-			model.addAttribute("tasks", taskListAll);
-			
-			return "tasks";
-		} else if (sort.equals("Desc")) {
-			List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateDesc();
-			taskListAll.removeAll(taskRepository.findByProgressIs(3));
-			model.addAttribute("tasks", taskListAll);
+		List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateAsc();
+		taskListAll.removeAll(taskRepository.findByProgressIs(3));
+		model.addAttribute("tasks", taskListAll);
 
-			return "tasks";
-		} else {
-			List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateAsc();
-			taskListAll.removeAll(taskRepository.findByProgressIs(3));
-			model.addAttribute("tasks", taskListAll);
-
-			return "tasks";
-		}
+		return "tasks";
 	}
 
 	//タスク追加
@@ -134,7 +121,7 @@ public class TasksController {
 		taskRepository.save(task);
 		return "redirect:/todo";
 	}
-	
+
 	//進行中
 	@PostMapping("/todo/{taskId}/onTime")
 	public String onTime(
@@ -145,7 +132,7 @@ public class TasksController {
 		taskRepository.save(task);
 		return "redirect:/todo";
 	}
-	
+
 	//未完了
 	@PostMapping("/todo/{taskId}/notComplete")
 	public String noComplete(
@@ -160,29 +147,95 @@ public class TasksController {
 	//指定検索(優先度)
 	@GetMapping("/todo/sort")
 	public String sort(
-			@RequestParam(name = "category", defaultValue = "") String priority,
+			@RequestParam(name = "sort", defaultValue = "") String sort,
+			@RequestParam(name = "category", defaultValue = "") Integer priority,
+			Model model) {
+
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
+		model.addAttribute("categoryId", priority);
+
+		if (priority != null && sort.equals("Asc")) {
+			//優先度あり昇順
+			List<Tasks> taskListHigh = taskRepository.findByCategoryIdOrderByClosingDateAsc(priority);
+			taskListHigh.removeAll(taskRepository.findByProgressIs(3));
+			model.addAttribute("tasks", taskListHigh);
+			return "tasks";
+
+		} else if (priority != null && sort.equals("Desc")) {
+			//優先度あり降順
+			List<Tasks> taskListHigh = taskRepository.findByCategoryIdOrderByClosingDateDesc(priority);
+			taskListHigh.removeAll(taskRepository.findByProgressIs(3));
+			model.addAttribute("tasks", taskListHigh);
+			return "tasks";
+		} else if(priority != null) {
+			//優先度あり指定なし
+			switch (priority) {
+			case 1:
+				List<Tasks> taskListHigh = taskRepository.findByCategoryIdIs(1);
+				taskListHigh.removeAll(taskRepository.findByProgressIs(3));
+				model.addAttribute("tasks", taskListHigh);
+				return "tasks";
+
+			case 2:
+				List<Tasks> taskListMiddle = taskRepository.findByCategoryIdIs(2);
+				taskListMiddle.removeAll(taskRepository.findByProgressIs(3));
+				model.addAttribute("tasks", taskListMiddle);
+				return "tasks";
+
+			case 3:
+				List<Tasks> taskListLow = taskRepository.findByCategoryIdIs(3);
+				taskListLow.removeAll(taskRepository.findByProgressIs(3));
+				model.addAttribute("tasks", taskListLow);
+				return "tasks";
+
+			default:
+				//起こりえないので適当
+				return "login";
+			}
+		}
+		//優先度なし
+			else {
+				if (sort.equals("Asc")) {
+					//優先度なし昇順
+					List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateAsc();
+					taskListAll.removeAll(taskRepository.findByProgressIs(3));
+					model.addAttribute("tasks", taskListAll);
+					
+					List<Tasks> completeTasks = taskRepository.findByProgressIs(3);
+					model.addAttribute("completeTasks", completeTasks);
+					return "tasks";
+				} else {
+					//優先度なし降順
+					List<Tasks> taskListAll = taskRepository.findAllByOrderByClosingDateDesc();
+					taskListAll.removeAll(taskRepository.findByProgressIs(3));
+					model.addAttribute("tasks", taskListAll);
+					
+					List<Tasks> completeTasks = taskRepository.findByProgressIs(3);
+					model.addAttribute("completeTasks", completeTasks);
+					return "tasks";
+				}
+			}
+		}
+
+	//指定検索(進捗度)
+	@GetMapping("/todo/progress")
+	public String sort(
+			@RequestParam(name = "progress", defaultValue = "") Integer progress,
 			Model model) {
 
 		List<Category> categories = categoryRepository.findAll();
 		model.addAttribute("categories", categories);
 
-		switch (priority) {
-		case "高":
-			List<Tasks> taskListHigh = taskRepository.findByCategoryIdIs(1);
-			taskListHigh.removeAll(taskRepository.findByProgressIs(3));
-			model.addAttribute("tasks", taskListHigh);
+		switch (progress) {
+		case 1:
+			List<Tasks> taskListUntil = taskRepository.findByProgressIs(1);
+			model.addAttribute("tasks", taskListUntil);
 			return "tasks";
 
-		case "中":
-			List<Tasks> taskListMiddle = taskRepository.findByCategoryIdIs(2);
-			taskListMiddle.removeAll(taskRepository.findByProgressIs(3));
-			model.addAttribute("tasks", taskListMiddle);
-			return "tasks";
-
-		case "低":
-			List<Tasks> taskListLow = taskRepository.findByCategoryIdIs(3);
-			taskListLow.removeAll(taskRepository.findByProgressIs(3));
-			model.addAttribute("tasks", taskListLow);
+		case 2:
+			List<Tasks> taskListNow = taskRepository.findByProgressIs(2);
+			model.addAttribute("tasks", taskListNow);
 			return "tasks";
 
 		default:
@@ -191,30 +244,10 @@ public class TasksController {
 			return "tasks";
 		}
 	}
-	//指定検索(進捗度)
-	@GetMapping("/todo/progress")
-	public String sort(
-			@RequestParam(name = "progress", defaultValue = "") Integer progress,
-			Model model) {
-		
-		List<Category> categories = categoryRepository.findAll();
-		model.addAttribute("categories", categories);
-		
-		switch (progress) {
-		case 1:
-			List<Tasks> taskListUntil = taskRepository.findByProgressIs(1);
-			model.addAttribute("tasks", taskListUntil);
-			return "tasks";
-			
-		case 2:
-			List<Tasks> taskListNow = taskRepository.findByProgressIs(2);
-			model.addAttribute("tasks", taskListNow);
-			return "tasks";
-			
-		default:
-			List<Tasks> taskListAll = taskRepository.findAll();
-			model.addAttribute("tasks", taskListAll);
-			return "tasks";
-		}
+
+	//カレンダー
+	@GetMapping("/todo/calendar")
+	public String calendar() {
+		return "calendar";
 	}
 }
