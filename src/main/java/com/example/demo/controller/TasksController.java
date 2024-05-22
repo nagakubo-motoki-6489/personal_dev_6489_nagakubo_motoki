@@ -171,19 +171,19 @@ public class TasksController {
 		} else if(priority != null) {
 			//優先度あり指定なし
 			switch (priority) {
-			case 1:
+			case 1://高
 				List<Tasks> taskListHigh = taskRepository.findByCategoryIdIs(1);
 				taskListHigh.removeAll(taskRepository.findByProgressIs(3));
 				model.addAttribute("tasks", taskListHigh);
 				return "tasks";
 
-			case 2:
+			case 2://中
 				List<Tasks> taskListMiddle = taskRepository.findByCategoryIdIs(2);
 				taskListMiddle.removeAll(taskRepository.findByProgressIs(3));
 				model.addAttribute("tasks", taskListMiddle);
 				return "tasks";
 
-			case 3:
+			case 3://低
 				List<Tasks> taskListLow = taskRepository.findByCategoryIdIs(3);
 				taskListLow.removeAll(taskRepository.findByProgressIs(3));
 				model.addAttribute("tasks", taskListLow);
@@ -247,7 +247,11 @@ public class TasksController {
 
 	//カレンダー
 	@GetMapping("/todo/calendar")
-	public String calendar() {
+	public String calendar(Model model) {
+		List<Tasks> taskListAll = taskRepository.findAll();
+		//taskListAll.removeAll(taskRepository.findByProgressIs(3));
+		model.addAttribute("tasks", taskListAll);
+		
 		return "calendar";
 	}
 }

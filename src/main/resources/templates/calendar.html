@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="/css/calendar.css" />
   </head>
   <body>
+	  <header th:replace="header"></header>
+	  <br>
+	  <br>
+	  <br>
     <div class="calendar">
       <div class="header">
         <h1 id="month"></h1>
@@ -20,6 +24,15 @@
         <div class="week" id="week6"></div>
       </div>
     </div>
+    
+    <footer th:replace="footer"></footer>
+    
+    
     <script src="/js/calendar.js"></script>
+    <script th:inline="javascript">
+		const tasks = /*[[${tasks}]]*/"tasks";
+        // JavaScriptの関数呼び出し
+        addSchedule();
+	</script>
   </body>
 </html>
