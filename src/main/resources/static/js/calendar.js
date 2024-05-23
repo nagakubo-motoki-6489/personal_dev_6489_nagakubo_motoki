@@ -86,7 +86,7 @@ function addSchedule() {
     				console.log(element);
     				element.classList.add("existEvent");
     				
-    				var alert = (tasks[i].title + "\n" + tasks[i].memo);
+    				var alert = (tasks[i].title + "\n" + "→" + tasks[i].memo);
  
     				element.addEventListener('click', function(){
 						showInfo(alert);	
